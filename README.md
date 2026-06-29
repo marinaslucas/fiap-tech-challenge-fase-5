@@ -9,6 +9,10 @@ pinned: false
 
 # ThreatGraph AI
 
+## Equipe
+
+Joalisson Borges, Luis Gustavo Santini, Marina Souza Lucas, Diego Santos.
+
 ThreatGraph AI is a hackathon MVP for automated STRIDE threat modeling from software architecture diagrams.
 
 The system accepts an architecture image, detects architecture components with a supervised YOLO model, normalizes detections into a structured architecture graph, and runs a LangGraph-style multi-agent workflow to generate a technical and executive security report.
