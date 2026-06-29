@@ -1,3 +1,6 @@
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
 interface ReportViewerProps {
   markdown: string;
 }
@@ -5,8 +8,10 @@ interface ReportViewerProps {
 export default function ReportViewer({ markdown }: ReportViewerProps) {
   return (
     <div className="report-viewer">
-      <div className="panel-title">Markdown Report</div>
-      <pre>{markdown}</pre>
+      <div className="panel-title">Report</div>
+      <div className="markdown-body">
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>{markdown}</ReactMarkdown>
+      </div>
     </div>
   );
 }
