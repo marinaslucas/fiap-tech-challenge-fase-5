@@ -2,12 +2,34 @@ import type { ArchitectureComponent } from "../types/architecture";
 
 interface ComponentOverviewProps {
   components: ArchitectureComponent[];
+  language?: "en" | "pt-BR";
 }
 
-export default function ComponentOverview({ components }: ComponentOverviewProps) {
+export default function ComponentOverview({ components, language = "en" }: ComponentOverviewProps) {
+  const labels =
+    language === "pt-BR"
+      ? {
+          title: "Vis\u00e3o dos Componentes",
+          type: "Tipo",
+          zone: "Zona",
+          exposure: "Exposi\u00e7\u00e3o",
+          confidence: "Confian\u00e7a",
+          unknown: "desconhecido",
+          empty: "Nenhum componente detectado.",
+        }
+      : {
+          title: "Component Overview",
+          type: "Type",
+          zone: "Zone",
+          exposure: "Exposure",
+          confidence: "Confidence",
+          unknown: "unknown",
+          empty: "No components detected.",
+        };
+
   return (
     <section className="component-overview">
-      <div className="panel-title">Component Overview</div>
+      <div className="panel-title">{labels.title}</div>
       <div className="component-grid">
         {components.map((component) => (
           <article className="component-card" key={component.id}>
@@ -17,25 +39,25 @@ export default function ComponentOverview({ components }: ComponentOverviewProps
             </div>
             <dl>
               <div>
-                <dt>Type</dt>
+                <dt>{labels.type}</dt>
                 <dd>{component.type}</dd>
               </div>
               <div>
-                <dt>Zone</dt>
-                <dd>{component.zone ?? "unknown"}</dd>
+                <dt>{labels.zone}</dt>
+                <dd>{component.zone ?? labels.unknown}</dd>
               </div>
               <div>
-                <dt>Exposure</dt>
-                <dd>{component.exposure ?? "unknown"}</dd>
+                <dt>{labels.exposure}</dt>
+                <dd>{component.exposure ?? labels.unknown}</dd>
               </div>
               <div>
-                <dt>Confidence</dt>
+                <dt>{labels.confidence}</dt>
                 <dd>{Math.round(component.confidence * 100)}%</dd>
               </div>
             </dl>
           </article>
         ))}
-        {!components.length && <div className="empty-state">No components detected.</div>}
+        {!components.length && <div className="empty-state">{labels.empty}</div>}
       </div>
     </section>
   );

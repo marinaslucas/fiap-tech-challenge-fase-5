@@ -15,17 +15,18 @@ def run_analysis_graph(
     vulnerability_agent = VulnerabilityAgent()
     countermeasure_agent = CountermeasureAgent()
     report_agent = ReportAgent()
+    report_language = gemini_config.report_language if gemini_config else "en"
 
     architecture = topology_agent.run(detections)
     threats = stride_agent.run(architecture, gemini_config=gemini_config)
-    vulnerabilities = vulnerability_agent.run(threats)
-    countermeasures = countermeasure_agent.run(threats)
+    vulnerabilities = vulnerability_agent.run(threats, report_language=report_language)
+    countermeasures = countermeasure_agent.run(threats, report_language=report_language)
     report_markdown = report_agent.run(
         architecture=architecture,
         threats=threats,
         vulnerabilities=vulnerabilities,
         countermeasures=countermeasures,
-        report_language=gemini_config.report_language if gemini_config else "en",
+        report_language=report_language,
     )
     stride_audit = stride_agent.audit
 
@@ -41,7 +42,7 @@ def run_analysis_graph(
             threat_count=len(threats),
             vulnerability_count=len(vulnerabilities),
             countermeasure_count=len(countermeasures),
-            report_language=gemini_config.report_language if gemini_config else "en",
+            report_language=report_language,
             gemini_model=stride_audit.get("model") if stride_audit else None,
             gemini_configured=bool(stride_audit.get("gemini_configured")) if stride_audit else False,
             llm_used=bool(stride_audit.get("llm_used")) if stride_audit else False,

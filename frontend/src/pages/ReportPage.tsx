@@ -15,6 +15,8 @@ interface ReportPageProps {
 }
 
 export default function ReportPage({ analysis, imageUrl, detections }: ReportPageProps) {
+  const isPtBr = analysis?.audit.report_language === "pt-BR";
+
   function handleExportPdf() {
     window.print();
   }
@@ -23,13 +25,13 @@ export default function ReportPage({ analysis, imageUrl, detections }: ReportPag
     <section className="page-grid">
       <header className="page-header">
         <div>
-          <p className="eyebrow">STRIDE Output</p>
-          <h1>Threat Report</h1>
+          <p className="eyebrow">{isPtBr ? "Resultado STRIDE" : "STRIDE Output"}</p>
+          <h1>{isPtBr ? "Relat\u00f3rio de Amea\u00e7as" : "Threat Report"}</h1>
         </div>
         {analysis && (
           <button className="primary-action no-print" onClick={handleExportPdf}>
             <FileDown size={18} aria-hidden="true" />
-            Export PDF
+            {isPtBr ? "Exportar PDF" : "Export PDF"}
           </button>
         )}
       </header>
@@ -38,13 +40,13 @@ export default function ReportPage({ analysis, imageUrl, detections }: ReportPag
         <>
           <RiskMatrix threats={analysis.threats} />
           <section className="annotated-diagram">
-            <div className="panel-title">Annotated Diagram</div>
+            <div className="panel-title">{isPtBr ? "Diagrama Anotado" : "Annotated Diagram"}</div>
             <div className="annotated-diagram-body">
               <DetectionViewer imageUrl={imageUrl} detections={detections} showFooter={false} />
             </div>
           </section>
-          <ComponentOverview components={analysis.architecture.components} />
-          <ThreatTable threats={analysis.threats} />
+          <ComponentOverview components={analysis.architecture.components} language={analysis.audit.report_language} />
+          <ThreatTable threats={analysis.threats} language={analysis.audit.report_language} />
           <ReportViewer markdown={analysis.report_markdown} />
         </>
       ) : (

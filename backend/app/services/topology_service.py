@@ -1,4 +1,4 @@
-from app.schemas import ArchitectureComponent, ArchitectureModel, Detection
+from app.schemas import ArchitectureComponent, ArchitectureFlow, ArchitectureModel, Detection
 
 
 INTERNET_FACING_TYPES = {
@@ -24,6 +24,19 @@ EXTERNAL_TYPES = {
     "external_saas_service",
     "external_web_service",
     "communication_service",
+}
+ACTOR_TYPES = {"actor_user", "actor_admin"}
+ENTRYPOINT_TYPES = {
+    "api_gateway",
+    "waf",
+    "load_balancer",
+    "edge_gateway",
+    "edge_waf",
+    "edge_cdn",
+    "edge_ddos_protection",
+    "edge_portal",
+    "external_entry_point",
+    "compute_load_balancer",
 }
 BOUNDARY_TYPES = {
     "boundary_cloud",
@@ -56,7 +69,11 @@ class TopologyService:
             if detection.component_type in BOUNDARY_TYPES:
                 trust_boundaries.append(component.id)
 
-        return ArchitectureModel(components=components, trust_boundaries=trust_boundaries)
+        return ArchitectureModel(
+            components=components,
+            flows=self._infer_flows(components),
+            trust_boundaries=trust_boundaries,
+        )
 
     def _infer_zone(self, component_type: str) -> str:
         if component_type in {"actor_user", "actor_admin"}:
@@ -88,3 +105,21 @@ class TopologyService:
 
     def _display_name(self, component_type: str) -> str:
         return component_type.replace("_", " ").title()
+
+    def _infer_flows(self, components: list[ArchitectureComponent]) -> list[ArchitectureFlow]:
+        actors = [component for component in components if component.type in ACTOR_TYPES]
+        entrypoints = [component for component in components if component.type in ENTRYPOINT_TYPES]
+
+        flows: list[ArchitectureFlow] = []
+        for actor in actors:
+            for entrypoint in entrypoints:
+                flows.append(
+                    ArchitectureFlow(
+                        source=actor.id,
+                        target=entrypoint.id,
+                        protocol="HTTPS",
+                        confidence="Low",
+                    )
+                )
+
+        return flows

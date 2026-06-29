@@ -2,20 +2,38 @@ import type { Threat } from "../types/threat";
 
 interface ThreatTableProps {
   threats: Threat[];
+  language?: "en" | "pt-BR";
 }
 
-export default function ThreatTable({ threats }: ThreatTableProps) {
+export default function ThreatTable({ threats, language = "en" }: ThreatTableProps) {
+  const labels =
+    language === "pt-BR"
+      ? {
+          title: "Amea\u00e7as",
+          severity: "Severidade",
+          confidence: "Confian\u00e7a",
+          evidence: "Evid\u00eancia",
+          empty: "Nenhuma amea\u00e7a gerada.",
+        }
+      : {
+          title: "Threats",
+          severity: "Severity",
+          confidence: "Confidence",
+          evidence: "Evidence",
+          empty: "No threats generated.",
+        };
+
   return (
     <div className="table-panel">
-      <div className="panel-title">Threats</div>
+      <div className="panel-title">{labels.title}</div>
       <table>
         <thead>
           <tr>
             <th>ID</th>
             <th>STRIDE</th>
-            <th>Severity</th>
-            <th>Confidence</th>
-            <th>Evidence</th>
+            <th>{labels.severity}</th>
+            <th>{labels.confidence}</th>
+            <th>{labels.evidence}</th>
           </tr>
         </thead>
         <tbody>
@@ -30,7 +48,7 @@ export default function ThreatTable({ threats }: ThreatTableProps) {
           ))}
           {!threats.length && (
             <tr>
-              <td colSpan={5}>No threats generated.</td>
+              <td colSpan={5}>{labels.empty}</td>
             </tr>
           )}
         </tbody>
