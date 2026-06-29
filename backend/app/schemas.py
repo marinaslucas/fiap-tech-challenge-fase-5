@@ -82,9 +82,26 @@ class AnalysisRequest(BaseModel):
     detections: list[Detection]
 
 
+class AnalysisAudit(BaseModel):
+    detector_input_count: int
+    normalized_component_count: int
+    threat_count: int
+    vulnerability_count: int
+    countermeasure_count: int
+    report_language: Literal["en", "pt-BR"]
+    gemini_model: str | None = None
+    gemini_configured: bool = False
+    llm_used: bool = False
+    fallback_used: bool = False
+    fallback_reason: str | None = None
+    stride_prompt: str | None = None
+    agent_log: list[str] = []
+
+
 class AnalysisResponse(BaseModel):
     architecture: ArchitectureModel
     threats: list[Threat]
     vulnerabilities: list[VulnerabilityFinding]
     countermeasures: list[Countermeasure]
     report_markdown: str
+    audit: AnalysisAudit

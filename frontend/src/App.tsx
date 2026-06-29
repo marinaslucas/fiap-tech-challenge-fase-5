@@ -1,6 +1,7 @@
-import { FileText, History, KeyRound, Radar, UploadCloud } from "lucide-react";
+import { FileSearch, FileText, History, KeyRound, Radar, UploadCloud } from "lucide-react";
 import { useState } from "react";
 
+import AuditPage from "./pages/AuditPage";
 import HistoryPage from "./pages/HistoryPage";
 import ReportPage from "./pages/ReportPage";
 import ReviewComponentsPage from "./pages/ReviewComponentsPage";
@@ -8,7 +9,7 @@ import UploadPage from "./pages/UploadPage";
 import type { Detection } from "./types/detection";
 import type { AnalysisResponse } from "./types/report";
 
-type Page = "upload" | "review" | "report" | "history";
+type Page = "upload" | "review" | "report" | "audit" | "history";
 
 const GEMINI_MODELS = ["gemini-3.1-flash-lite", "gemini-3.5-flash"];
 const REPORT_LANGUAGES = [
@@ -50,6 +51,10 @@ export default function App() {
           <button className={page === "report" ? "active" : ""} onClick={() => setPage("report")}>
             <FileText size={18} aria-hidden="true" />
             Report
+          </button>
+          <button className={page === "audit" ? "active" : ""} onClick={() => setPage("audit")}>
+            <FileSearch size={18} aria-hidden="true" />
+            Audit
           </button>
           <button className={page === "history" ? "active" : ""} onClick={() => setPage("history")}>
             <History size={18} aria-hidden="true" />
@@ -128,6 +133,7 @@ export default function App() {
         {page === "report" && (
           <ReportPage analysis={analysis} imageUrl={imageUrl} detections={detections} />
         )}
+        {page === "audit" && <AuditPage analysis={analysis} />}
         {page === "history" && <HistoryPage />}
       </main>
     </div>

@@ -7,6 +7,7 @@ from app.services.llm_service import LlmService
 class StrideAgent:
     def __init__(self, llm_service: LlmService | None = None) -> None:
         self.llm_service = llm_service or LlmService()
+        self.audit: dict[str, object] = {}
 
     def run(self, architecture: ArchitectureModel, gemini_config: GeminiConfig | None = None) -> list[Threat]:
         report_language = gemini_config.report_language if gemini_config else "en"
@@ -15,14 +16,31 @@ class StrideAgent:
                 api_key=gemini_config.api_key,
                 model=gemini_config.model,
             )
-        llm_threats = self._run_with_llm(architecture, report_language)
+        prompt = self._build_prompt(architecture, report_language)
+        llm_threats = self._run_with_llm(prompt)
         if llm_threats:
+            self.audit = {
+                "llm_used": True,
+                "fallback_used": False,
+                "fallback_reason": None,
+                "model": self.llm_service.model,
+                "gemini_configured": self.llm_service.is_enabled(),
+                "prompt": prompt,
+            }
             return llm_threats
 
-        return self._run_with_rules(architecture, report_language)
+        threats = self._run_with_rules(architecture, report_language)
+        self.audit = {
+            "llm_used": False,
+            "fallback_used": True,
+            "fallback_reason": self.llm_service.last_error or "Gemini returned no usable threats.",
+            "model": self.llm_service.model,
+            "gemini_configured": self.llm_service.is_enabled(),
+            "prompt": prompt,
+        }
+        return threats
 
-    def _run_with_llm(self, architecture: ArchitectureModel, report_language: str) -> list[Threat]:
-        prompt = self._build_prompt(architecture, report_language)
+    def _run_with_llm(self, prompt: str) -> list[Threat]:
         payload = self.llm_service.generate_json(prompt)
         if not payload:
             return []

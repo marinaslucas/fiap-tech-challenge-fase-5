@@ -11,11 +11,13 @@ class LlmService:
     def __init__(self, api_key: str | None = None, model: str | None = None) -> None:
         self.api_key = api_key or settings.gemini_api_key
         self.model = self._safe_model(model or settings.gemini_model)
+        self.last_error: str | None = None
 
     def is_enabled(self) -> bool:
         return bool(settings.llm_enabled and self.api_key)
 
     def generate_json(self, prompt: str) -> dict[str, Any] | None:
+        self.last_error = None
         text = self.generate_text(prompt)
         if not text:
             return None
@@ -25,20 +27,24 @@ class LlmService:
         except json.JSONDecodeError:
             match = re.search(r"\{.*\}", text, flags=re.DOTALL)
             if not match:
+                self.last_error = "Gemini response was not valid JSON."
                 return None
 
         try:
             return json.loads(match.group(0))
         except json.JSONDecodeError:
+            self.last_error = "Gemini response contained malformed JSON."
             return None
 
     def generate_text(self, prompt: str) -> str | None:
         if not self.is_enabled():
+            self.last_error = "Gemini is not configured or LLM usage is disabled."
             return None
 
         try:
             from google import genai
         except ImportError:
+            self.last_error = "google-genai is not installed."
             return None
 
         try:
@@ -48,7 +54,8 @@ class LlmService:
                 contents=prompt,
             )
             return response.text
-        except Exception:
+        except Exception as error:
+            self.last_error = f"Gemini request failed: {error.__class__.__name__}."
             return None
 
     def _safe_model(self, model: str) -> str:

@@ -578,6 +578,78 @@ th {
   padding: 10px 14px;
 }
 
+.audit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+}
+
+.audit-metric,
+.audit-panel {
+  border: 1px solid #dbe2e8;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.audit-metric {
+  display: grid;
+  gap: 8px;
+  min-height: 88px;
+  padding: 14px;
+}
+
+.audit-metric span {
+  color: #5a6875;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.audit-metric strong {
+  font-size: 24px;
+}
+
+.audit-facts {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 14px 16px;
+}
+
+.audit-facts div {
+  display: grid;
+  grid-template-columns: minmax(160px, 0.35fr) 1fr;
+  gap: 12px;
+}
+
+.audit-facts dt {
+  color: #5a6875;
+  font-weight: 800;
+}
+
+.audit-facts dd {
+  margin: 0;
+}
+
+.audit-list {
+  margin: 0;
+  padding: 14px 16px 14px 38px;
+}
+
+.audit-list li {
+  margin: 8px 0;
+}
+
+.audit-code {
+  margin: 0;
+  max-height: 520px;
+  overflow: auto;
+  background: #101820;
+  color: #f7fafc;
+  padding: 16px;
+  white-space: pre-wrap;
+}
+
 @media print {
   body {
     background: #ffffff;
