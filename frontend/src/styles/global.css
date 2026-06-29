@@ -264,6 +264,7 @@ select {
 .detection-box {
   position: absolute;
   border: 3px solid #13b5ff;
+  background: transparent;
   box-shadow:
     0 0 0 1px rgb(255 255 255 / 0.9),
     0 0 18px rgb(19 181 255 / 0.42);
@@ -284,39 +285,51 @@ select {
   white-space: nowrap;
 }
 
-.detection-box-0,
-.detection-box-0 span {
+.detection-box-0 {
   border-color: #13b5ff;
+}
+
+.detection-box-0 span {
   background-color: #13b5ff;
 }
 
-.detection-box-1,
-.detection-box-1 span {
+.detection-box-1 {
   border-color: #ff4d8d;
+}
+
+.detection-box-1 span {
   background-color: #ff4d8d;
 }
 
-.detection-box-2,
-.detection-box-2 span {
+.detection-box-2 {
   border-color: #ffb000;
+}
+
+.detection-box-2 span {
   background-color: #ffb000;
 }
 
-.detection-box-3,
-.detection-box-3 span {
+.detection-box-3 {
   border-color: #45d483;
+}
+
+.detection-box-3 span {
   background-color: #45d483;
 }
 
-.detection-box-4,
-.detection-box-4 span {
+.detection-box-4 {
   border-color: #a66bff;
+}
+
+.detection-box-4 span {
   background-color: #a66bff;
 }
 
-.detection-box-5,
-.detection-box-5 span {
+.detection-box-5 {
   border-color: #ff6b35;
+}
+
+.detection-box-5 span {
   background-color: #ff6b35;
 }
 
