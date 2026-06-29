@@ -6,9 +6,15 @@ interface DetectionViewerProps {
   imageUrl: string | null;
   detections: Detection[];
   isBusy?: boolean;
+  showFooter?: boolean;
 }
 
-export default function DetectionViewer({ imageUrl, detections, isBusy }: DetectionViewerProps) {
+export default function DetectionViewer({
+  imageUrl,
+  detections,
+  isBusy,
+  showFooter = true,
+}: DetectionViewerProps) {
   const [imageSize, setImageSize] = useState({
     naturalWidth: 0,
     naturalHeight: 0,
@@ -75,10 +81,12 @@ export default function DetectionViewer({ imageUrl, detections, isBusy }: Detect
           <div className="empty-state">No image selected.</div>
         )}
       </div>
-      <div className="viewer-footer">
-        <span>{detections.length} components</span>
-        <span>{isBusy ? "Processing" : detections.some((item) => item.confidence < 0.8) ? "Review needed" : "Ready"}</span>
-      </div>
+      {showFooter && (
+        <div className="viewer-footer">
+          <span>{detections.length} components</span>
+          <span>{isBusy ? "Processing" : detections.some((item) => item.confidence < 0.8) ? "Review needed" : "Ready"}</span>
+        </div>
+      )}
     </div>
   );
 }

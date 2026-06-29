@@ -125,7 +125,9 @@ export default function App() {
             geminiConfig={geminiConfig}
           />
         )}
-        {page === "report" && <ReportPage analysis={analysis} />}
+        {page === "report" && (
+          <ReportPage analysis={analysis} imageUrl={imageUrl} detections={detections} />
+        )}
         {page === "history" && <HistoryPage />}
       </main>
     </div>

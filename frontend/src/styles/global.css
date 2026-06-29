@@ -432,6 +432,24 @@ th {
   background: #ffffff;
 }
 
+.annotated-diagram {
+  border: 1px solid #dbe2e8;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.annotated-diagram-body {
+  padding: 14px;
+}
+
+.annotated-diagram .viewer-frame {
+  width: 100%;
+}
+
+.annotated-diagram .viewer img {
+  max-height: 720px;
+}
+
 .component-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -517,6 +535,7 @@ th {
   .table-panel,
   .report-viewer,
   .component-overview,
+  .annotated-diagram,
   .risk-cell {
     break-inside: avoid;
     box-shadow: none;
