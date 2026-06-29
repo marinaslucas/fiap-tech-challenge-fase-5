@@ -1,0 +1,124 @@
+components:
+  actor_user:
+    zone: internet
+    exposure: external
+  actor_admin:
+    zone: internet
+    exposure: external
+  edge_ddos_protection:
+    zone: edge
+    exposure: internet-facing
+  edge_cdn:
+    zone: edge
+    exposure: internet-facing
+  edge_waf:
+    zone: edge
+    exposure: internet-facing
+  edge_gateway:
+    zone: edge
+    exposure: internet-facing
+  edge_portal:
+    zone: edge
+    exposure: internet-facing
+  external_entry_point:
+    zone: edge
+    exposure: internet-facing
+  integration_orchestrator:
+    zone: application
+    exposure: internal
+  integration_messaging:
+    zone: application
+    exposure: internal
+  compute_load_balancer:
+    zone: edge
+    exposure: internet-facing
+  compute_service:
+    zone: application
+    exposure: internal
+  compute_worker:
+    zone: application
+    exposure: internal
+  data_database:
+    zone: data
+    exposure: internal
+  data_cache:
+    zone: data
+    exposure: internal
+  data_storage:
+    zone: data
+    exposure: internal
+  security_identity_provider:
+    zone: security
+    exposure: external
+  security_key_management:
+    zone: security
+    exposure: internal
+  obs_monitoring:
+    zone: observability
+    exposure: internal
+  obs_audit:
+    zone: security
+    exposure: internal
+  external_backend_service:
+    zone: external_services
+    exposure: external
+  external_saas_service:
+    zone: external_services
+    exposure: external
+  external_web_service:
+    zone: external_services
+    exposure: external
+  communication_service:
+    zone: external_services
+    exposure: external
+  backup_service:
+    zone: data
+    exposure: internal
+  boundary_cloud:
+    zone: network_boundary
+    exposure: network-boundary
+  boundary_region:
+    zone: network_boundary
+    exposure: network-boundary
+  boundary_resource_group:
+    zone: network_boundary
+    exposure: network-boundary
+  boundary_vpc_or_vnet:
+    zone: network_boundary
+    exposure: network-boundary
+  boundary_subnet_public:
+    zone: network_boundary
+    exposure: public-network-boundary
+  boundary_subnet_private:
+    zone: network_boundary
+    exposure: network-boundary
+  boundary_autoscaling_group:
+    zone: network_boundary
+    exposure: network-boundary
+  external_user:
+    zone: internet
+    exposure: external
+  api_gateway:
+    zone: edge
+    exposure: internet-facing
+  waf:
+    zone: edge
+    exposure: internet-facing
+  load_balancer:
+    zone: edge
+    exposure: internet-facing
+  service:
+    zone: application
+    exposure: internal
+  database:
+    zone: data
+    exposure: internal
+  cache:
+    zone: data
+    exposure: internal
+  object_storage:
+    zone: data
+    exposure: internal
+  identity_provider:
+    zone: external_services
+    exposure: external

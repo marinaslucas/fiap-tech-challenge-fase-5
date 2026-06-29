@@ -1,0 +1,16 @@
+rules:
+  - category: Denial of Service
+    applies_to:
+      - api_gateway
+      - waf
+      - load_balancer
+    evidence_hint: internet-facing component
+    default_severity: High
+    default_confidence: Medium
+  - category: Spoofing
+    applies_to:
+      - identity_provider
+      - api_gateway
+    evidence_hint: authentication boundary
+    default_severity: Medium
+    default_confidence: Medium

@@ -1,0 +1,39 @@
+# Environment
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+venv/
+*.log
+
+# Node
+node_modules/
+dist/
+coverage/
+
+# Local storage
+backend/storage/uploads/*
+backend/storage/predictions/*
+backend/storage/reports/*
+!backend/storage/uploads/.gitkeep
+!backend/storage/predictions/.gitkeep
+!backend/storage/reports/.gitkeep
+
+# Model artifacts
+models/*.pt
+!models/best.pt
+models/*.onnx
+models/*.engine
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

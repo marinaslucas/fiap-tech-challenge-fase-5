@@ -1,0 +1,70 @@
+{
+  "model_name": "architecture-component-detector",
+  "run_name": "stride_architecture_components_yolov8n",
+  "framework": "YOLO",
+  "base_model": "yolov8n.pt",
+  "artifact": "best.pt",
+  "source_bucket": "hf://buckets/lgsantini1/stride-architecture-components-v1-bucket",
+  "trained_at_utc": "2026-06-28T18:46:49.259824+00:00",
+  "image_size": 960,
+  "epochs": 60,
+  "batch": 8,
+  "classes": [
+    "actor_user",
+    "actor_admin",
+    "edge_ddos_protection",
+    "edge_cdn",
+    "edge_waf",
+    "edge_gateway",
+    "edge_portal",
+    "external_entry_point",
+    "integration_orchestrator",
+    "integration_messaging",
+    "compute_load_balancer",
+    "compute_service",
+    "compute_worker",
+    "data_database",
+    "data_cache",
+    "data_storage",
+    "security_identity_provider",
+    "security_key_management",
+    "obs_monitoring",
+    "obs_audit",
+    "external_backend_service",
+    "external_saas_service",
+    "external_web_service",
+    "communication_service",
+    "backup_service",
+    "boundary_cloud",
+    "boundary_region",
+    "boundary_resource_group",
+    "boundary_vpc_or_vnet",
+    "boundary_subnet_public",
+    "boundary_subnet_private",
+    "boundary_autoscaling_group"
+  ],
+  "dataset_summary": [
+    {
+      "split": "train",
+      "images": 1485,
+      "labels": 1490
+    },
+    {
+      "split": "val",
+      "images": 420,
+      "labels": 420
+    },
+    {
+      "split": "test",
+      "images": 230,
+      "labels": 230
+    }
+  ],
+  "metrics": {
+    "metrics/precision(B)": 0.837622500056658,
+    "metrics/recall(B)": 0.8310500502769947,
+    "metrics/mAP50(B)": 0.8462192071999743,
+    "metrics/mAP50-95(B)": 0.6530345016933252,
+    "fitness": 0.6530345016933252
+  }
+}

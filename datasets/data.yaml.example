@@ -1,0 +1,18 @@
+path: /content/threatgraph-dataset
+train: images/train
+val: images/val
+
+names:
+  0: external_user
+  1: api_gateway
+  2: waf
+  3: load_balancer
+  4: service
+  5: database
+  6: cache
+  7: object_storage
+  8: identity_provider
+  9: message_queue
+  10: monitoring
+  11: network_zone
+  12: trust_boundary

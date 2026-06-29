@@ -1,0 +1,27 @@
+{
+  "image_id": "0309354d-azure_arch_31_noise6",
+  "detections": [
+    {
+      "component_type": "edge_gateway",
+      "confidence": 0.9045,
+      "bbox": {
+        "x1": 453.78,
+        "y1": 313.77,
+        "x2": 513.6,
+        "y2": 369.56
+      }
+    },
+    {
+      "component_type": "external_backend_service",
+      "confidence": 0.6104,
+      "bbox": {
+        "x1": 300.82,
+        "y1": 27.68,
+        "x2": 351.09,
+        "y2": 79.53
+      }
+    }
+  ],
+  "model_version": "stride_architecture_components_yolov8n",
+  "needs_human_validation": true
+}
