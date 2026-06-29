@@ -235,6 +235,8 @@ select {
 
 .viewer-frame {
   position: relative;
+  display: inline-block;
+  max-width: 100%;
 }
 
 .viewer img,
@@ -249,7 +251,73 @@ select {
 .viewer img {
   display: block;
   object-fit: contain;
+  width: 100%;
   max-height: 560px;
+}
+
+.detection-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.detection-box {
+  position: absolute;
+  border: 3px solid #13b5ff;
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.9),
+    0 0 18px rgb(19 181 255 / 0.42);
+}
+
+.detection-box span {
+  position: absolute;
+  left: -3px;
+  top: -30px;
+  max-width: 260px;
+  border-radius: 6px 6px 6px 0;
+  background: #13b5ff;
+  color: #03131b;
+  padding: 4px 7px;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+.detection-box-0,
+.detection-box-0 span {
+  border-color: #13b5ff;
+  background-color: #13b5ff;
+}
+
+.detection-box-1,
+.detection-box-1 span {
+  border-color: #ff4d8d;
+  background-color: #ff4d8d;
+}
+
+.detection-box-2,
+.detection-box-2 span {
+  border-color: #ffb000;
+  background-color: #ffb000;
+}
+
+.detection-box-3,
+.detection-box-3 span {
+  border-color: #45d483;
+  background-color: #45d483;
+}
+
+.detection-box-4,
+.detection-box-4 span {
+  border-color: #a66bff;
+  background-color: #a66bff;
+}
+
+.detection-box-5,
+.detection-box-5 span {
+  border-color: #ff6b35;
+  background-color: #ff6b35;
 }
 
 .viewer-overlay {
