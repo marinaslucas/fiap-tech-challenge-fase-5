@@ -18,11 +18,10 @@ export default function DetectionViewer({
   const [imageSize, setImageSize] = useState({
     naturalWidth: 0,
     naturalHeight: 0,
-    renderedWidth: 0,
-    renderedHeight: 0,
   });
-  const scaleX = imageSize.naturalWidth ? imageSize.renderedWidth / imageSize.naturalWidth : 1;
-  const scaleY = imageSize.naturalHeight ? imageSize.renderedHeight / imageSize.naturalHeight : 1;
+  const canRenderDetections = imageSize.naturalWidth > 0 && imageSize.naturalHeight > 0;
+  const toPercent = (value: number, total: number) =>
+    `${Math.max(0, Math.min(100, (value / total) * 100))}%`;
 
   return (
     <div className="viewer">
@@ -37,24 +36,11 @@ export default function DetectionViewer({
                 setImageSize({
                   naturalWidth: image.naturalWidth,
                   naturalHeight: image.naturalHeight,
-                  renderedWidth: image.clientWidth,
-                  renderedHeight: image.clientHeight,
                 });
               }}
             />
-            <div
-              className="detection-layer"
-              aria-hidden="true"
-              style={{
-                width: `${imageSize.renderedWidth}px`,
-                height: `${imageSize.renderedHeight}px`,
-              }}
-            >
-              {detections.map((detection, index) => {
-                const left = detection.bbox.x1 * scaleX;
-                const top = detection.bbox.y1 * scaleY;
-                const width = (detection.bbox.x2 - detection.bbox.x1) * scaleX;
-                const height = (detection.bbox.y2 - detection.bbox.y1) * scaleY;
+            <div className="detection-layer" aria-hidden="true">
+              {canRenderDetections && detections.map((detection, index) => {
                 const colorIndex = index % 6;
 
                 return (
@@ -62,10 +48,10 @@ export default function DetectionViewer({
                     className={`detection-box detection-box-${colorIndex}`}
                     key={`${detection.component_type}-${index}`}
                     style={{
-                      left: `${left}px`,
-                      top: `${top}px`,
-                      width: `${width}px`,
-                      height: `${height}px`,
+                      left: toPercent(detection.bbox.x1, imageSize.naturalWidth),
+                      top: toPercent(detection.bbox.y1, imageSize.naturalHeight),
+                      width: toPercent(detection.bbox.x2 - detection.bbox.x1, imageSize.naturalWidth),
+                      height: toPercent(detection.bbox.y2 - detection.bbox.y1, imageSize.naturalHeight),
                     }}
                   >
                     <span>
