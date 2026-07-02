@@ -783,6 +783,9 @@ th {
     background: #ffffff;
     color: #0f172a;
     font-size: 10pt;
+    line-height: 1.35;
+    orphans: 3;
+    widows: 3;
   }
 
   .sidebar,
@@ -806,6 +809,7 @@ th {
   .report-print-shell {
     display: block;
     width: 100%;
+    padding-bottom: 16mm;
   }
 
   .report-document-header {
@@ -814,6 +818,7 @@ th {
     border-bottom: 1px solid #e2e8f0;
     border-radius: 0;
     padding: 0 0 10px;
+    break-after: avoid;
   }
 
   .report-document-header h2 {
@@ -832,6 +837,7 @@ th {
     border-radius: 4pt;
     padding: 10pt;
     break-inside: avoid;
+    page-break-inside: avoid;
   }
 
   .report-summary-card strong {
@@ -871,37 +877,52 @@ th {
   .table-panel,
   .report-viewer,
   .component-overview,
-  .annotated-diagram,
-  .risk-cell {
-    break-inside: avoid;
-    box-shadow: none;
-  }
-
-  .table-panel,
-  .report-viewer,
-  .component-overview,
   .annotated-diagram {
     margin-top: 12pt;
     border-color: #e2e8f0;
     border-radius: 4pt;
+    box-shadow: none;
+  }
+
+  .risk-grid,
+  .risk-cell,
+  .annotated-diagram {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .table-panel,
+  .report-viewer,
+  .component-overview {
+    break-inside: auto;
+    page-break-inside: auto;
   }
 
   .panel-title {
     padding: 8pt 10pt;
     background: #f8fafc;
     font-size: 10pt;
+    break-after: avoid;
+    page-break-after: avoid;
   }
 
   table {
     font-size: 8.5pt;
+    line-height: 1.3;
     page-break-inside: auto;
+    break-inside: auto;
   }
 
   thead {
     display: table-header-group;
   }
 
+  tfoot {
+    display: table-footer-group;
+  }
+
   tr {
+    break-inside: avoid;
     page-break-inside: avoid;
   }
 
@@ -923,11 +944,11 @@ th {
   .annotated-diagram-body,
   .component-grid,
   .markdown-body {
-    padding: 10pt;
+    padding: 8pt 10pt;
   }
 
   .annotated-diagram .viewer img {
-    max-height: 330pt;
+    max-height: 280pt;
   }
 
   .detection-box {
@@ -944,12 +965,14 @@ th {
   .component-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 7pt;
+    align-items: start;
   }
 
   .component-card {
     border-radius: 4pt;
     padding: 8pt;
     break-inside: avoid;
+    page-break-inside: avoid;
   }
 
   .component-card h2 {
@@ -961,21 +984,62 @@ th {
     line-height: 1.45;
   }
 
+  .markdown-body > *:first-child {
+    margin-top: 0;
+  }
+
   .markdown-body h1 {
     font-size: 16pt;
     margin-bottom: 10pt;
+    break-after: avoid;
+    page-break-after: avoid;
   }
 
   .markdown-body h2 {
-    margin-top: 14pt;
+    margin-top: 12pt;
     padding-top: 8pt;
     font-size: 13pt;
     break-after: avoid;
+    page-break-after: avoid;
   }
 
   .markdown-body h3 {
     font-size: 10.5pt;
     break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .markdown-body h1 + *,
+  .markdown-body h2 + *,
+  .markdown-body h3 + * {
+    break-before: avoid;
+    page-break-before: avoid;
+  }
+
+  .markdown-body p,
+  .markdown-body li,
+  .markdown-body blockquote {
+    orphans: 3;
+    widows: 3;
+  }
+
+  .markdown-body ul,
+  .markdown-body ol {
+    margin: 5pt 0 8pt;
+  }
+
+  .markdown-body li {
+    margin: 3pt 0;
+  }
+
+  .markdown-body table {
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
+  .markdown-body blockquote {
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
 
   .report-print-footer {
