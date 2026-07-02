@@ -72,6 +72,15 @@ class Countermeasure(BaseModel):
     priority: str
 
 
+class SecurityReference(BaseModel):
+    threat_id: str
+    source: str
+    reference_id: str
+    title: str
+    url: str
+    note: str
+
+
 class GeminiConfig(BaseModel):
     api_key: str | None = None
     model: str | None = None
@@ -88,6 +97,7 @@ class AnalysisAudit(BaseModel):
     threat_count: int
     vulnerability_count: int
     countermeasure_count: int
+    reference_count: int = 0
     report_language: Literal["en", "pt-BR"]
     gemini_model: str | None = None
     gemini_configured: bool = False
@@ -103,5 +113,6 @@ class AnalysisResponse(BaseModel):
     threats: list[Threat]
     vulnerabilities: list[VulnerabilityFinding]
     countermeasures: list[Countermeasure]
+    references: list[SecurityReference] = []
     report_markdown: str
     audit: AnalysisAudit

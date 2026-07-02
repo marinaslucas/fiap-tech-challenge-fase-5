@@ -36,6 +36,7 @@ export default function AuditPage({ analysis }: AuditPageProps) {
         <Metric label="Threats" value={audit.threat_count} />
         <Metric label="Vulnerabilities" value={audit.vulnerability_count} />
         <Metric label="Countermeasures" value={audit.countermeasure_count} />
+        <Metric label="References" value={audit.reference_count} />
         <Metric label="Language" value={audit.report_language} />
       </div>
 
@@ -79,6 +80,11 @@ export default function AuditPage({ analysis }: AuditPageProps) {
       <section className="audit-panel">
         <div className="panel-title">Normalized Architecture JSON</div>
         <pre className="audit-code">{JSON.stringify(analysis.architecture, null, 2)}</pre>
+      </section>
+
+      <section className="audit-panel">
+        <div className="panel-title">Curated Security References JSON</div>
+        <pre className="audit-code">{JSON.stringify(analysis.references, null, 2)}</pre>
       </section>
 
       {audit.stride_prompt && (

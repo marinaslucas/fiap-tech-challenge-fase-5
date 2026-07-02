@@ -21,3 +21,12 @@ export interface Countermeasure {
   recommendation: string;
   priority: string;
 }
+
+export interface SecurityReference {
+  threat_id: string;
+  source: string;
+  reference_id: string;
+  title: string;
+  url: string;
+  note: string;
+}

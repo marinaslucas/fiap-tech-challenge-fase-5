@@ -1,0 +1,191 @@
+Spoofing:
+  references:
+    - source: CWE
+      reference_id: CWE-287
+      title: Improper Authentication
+      url: https://cwe.mitre.org/data/definitions/287.html
+      note:
+        en: Use when identity, authentication, or token validation boundaries are missing or unclear.
+        pt-BR: Usar quando fronteiras de identidade, autenticacao ou validacao de tokens estiverem ausentes ou pouco claras.
+    - source: OWASP API Security
+      reference_id: API2:2023
+      title: Broken Authentication
+      url: https://owasp.org/API-Security/editions/2023/en/0xa2-broken-authentication/
+      note:
+        en: Relevant for APIs or gateways where authentication behavior must be confirmed.
+        pt-BR: Relevante para APIs ou gateways em que o comportamento de autenticacao precisa ser confirmado.
+    - source: NIST CSF
+      reference_id: PR.AA
+      title: Identity Management, Authentication, and Access Control
+      url: https://www.nist.gov/cyberframework
+      note:
+        en: Maps the finding to identity and access-control outcomes.
+        pt-BR: Relaciona o achado a resultados de identidade e controle de acesso.
+  cve:
+    source: CVE/NVD
+    reference_id: Requires product/version
+    title: CVE lookup requires confirmed technology and version
+    url: https://nvd.nist.gov/developers/vulnerabilities
+    note:
+      en: Do not assign CVEs from a diagram alone; validate product, package, and version first.
+      pt-BR: Nao atribuir CVEs apenas a partir do diagrama; validar produto, pacote e versao primeiro.
+
+Tampering:
+  references:
+    - source: CWE
+      reference_id: CWE-345
+      title: Insufficient Verification of Data Authenticity
+      url: https://cwe.mitre.org/data/definitions/345.html
+      note:
+        en: Use when request, data, or configuration integrity controls are not visible.
+        pt-BR: Usar quando controles de integridade de requisicoes, dados ou configuracao nao estiverem visiveis.
+    - source: OWASP API Security
+      reference_id: API3:2023
+      title: Broken Object Property Level Authorization
+      url: https://owasp.org/API-Security/editions/2023/en/0xa3-broken-object-property-level-authorization/
+      note:
+        en: Relevant when external actors may manipulate submitted properties or payloads.
+        pt-BR: Relevante quando atores externos podem manipular propriedades ou payloads enviados.
+    - source: NIST CSF
+      reference_id: PR.DS
+      title: Data Security
+      url: https://www.nist.gov/cyberframework
+      note:
+        en: Maps the finding to data integrity and protection outcomes.
+        pt-BR: Relaciona o achado a resultados de integridade e protecao de dados.
+  cve:
+    source: CVE/NVD
+    reference_id: Requires product/version
+    title: CVE lookup requires confirmed technology and version
+    url: https://nvd.nist.gov/developers/vulnerabilities
+    note:
+      en: Do not assign CVEs from a diagram alone; validate product, package, and version first.
+      pt-BR: Nao atribuir CVEs apenas a partir do diagrama; validar produto, pacote e versao primeiro.
+
+Repudiation:
+  references:
+    - source: CWE
+      reference_id: CWE-778
+      title: Insufficient Logging
+      url: https://cwe.mitre.org/data/definitions/778.html
+      note:
+        en: Use when audit, retention, or traceability controls are absent from the diagram.
+        pt-BR: Usar quando controles de auditoria, retencao ou rastreabilidade nao aparecem no diagrama.
+    - source: OWASP API Security
+      reference_id: API10:2023
+      title: Unsafe Consumption of APIs
+      url: https://owasp.org/API-Security/editions/2023/en/0xaa-unsafe-consumption-of-apis/
+      note:
+        en: Useful when accountability across API consumers or providers must be validated.
+        pt-BR: Util quando a responsabilizacao entre consumidores ou provedores de API precisa ser validada.
+    - source: NIST CSF
+      reference_id: DE.CM
+      title: Continuous Monitoring
+      url: https://www.nist.gov/cyberframework
+      note:
+        en: Maps the finding to monitoring and evidence-collection outcomes.
+        pt-BR: Relaciona o achado a resultados de monitoramento e coleta de evidencias.
+  cve:
+    source: CVE/NVD
+    reference_id: Requires product/version
+    title: CVE lookup requires confirmed technology and version
+    url: https://nvd.nist.gov/developers/vulnerabilities
+    note:
+      en: Do not assign CVEs from a diagram alone; validate product, package, and version first.
+      pt-BR: Nao atribuir CVEs apenas a partir do diagrama; validar produto, pacote e versao primeiro.
+
+Information Disclosure:
+  references:
+    - source: CWE
+      reference_id: CWE-200
+      title: Exposure of Sensitive Information to an Unauthorized Actor
+      url: https://cwe.mitre.org/data/definitions/200.html
+      note:
+        en: Use when data exposure boundaries or encryption controls are unknown.
+        pt-BR: Usar quando fronteiras de exposicao de dados ou controles de criptografia forem desconhecidos.
+    - source: OWASP API Security
+      reference_id: API3:2023
+      title: Broken Object Property Level Authorization
+      url: https://owasp.org/API-Security/editions/2023/en/0xa3-broken-object-property-level-authorization/
+      note:
+        en: Relevant when object properties or sensitive fields may be exposed.
+        pt-BR: Relevante quando propriedades de objetos ou campos sensiveis podem ser expostos.
+    - source: NIST CSF
+      reference_id: PR.DS
+      title: Data Security
+      url: https://www.nist.gov/cyberframework
+      note:
+        en: Maps the finding to protection of data at rest, in transit, and in use.
+        pt-BR: Relaciona o achado a protecao de dados em repouso, em transito e em uso.
+  cve:
+    source: CVE/NVD
+    reference_id: Requires product/version
+    title: CVE lookup requires confirmed technology and version
+    url: https://nvd.nist.gov/developers/vulnerabilities
+    note:
+      en: Do not assign CVEs from a diagram alone; validate product, package, and version first.
+      pt-BR: Nao atribuir CVEs apenas a partir do diagrama; validar produto, pacote e versao primeiro.
+
+Denial of Service:
+  references:
+    - source: CWE
+      reference_id: CWE-400
+      title: Uncontrolled Resource Consumption
+      url: https://cwe.mitre.org/data/definitions/400.html
+      note:
+        en: Use when rate limits, quotas, throttling, or resource controls are missing or unclear.
+        pt-BR: Usar quando limites, quotas, throttling ou controles de recursos estiverem ausentes ou pouco claros.
+    - source: OWASP API Security
+      reference_id: API4:2023
+      title: Unrestricted Resource Consumption
+      url: https://owasp.org/API-Security/editions/2023/en/0xa4-unrestricted-resource-consumption/
+      note:
+        en: Relevant for public gateways, APIs, and entry points exposed to traffic spikes.
+        pt-BR: Relevante para gateways publicos, APIs e pontos de entrada expostos a picos de trafego.
+    - source: NIST CSF
+      reference_id: DE.CM
+      title: Continuous Monitoring
+      url: https://www.nist.gov/cyberframework
+      note:
+        en: Maps the finding to monitoring, alerting, and availability evidence.
+        pt-BR: Relaciona o achado a monitoramento, alertas e evidencias de disponibilidade.
+  cve:
+    source: CVE/NVD
+    reference_id: Requires product/version
+    title: CVE lookup requires confirmed technology and version
+    url: https://nvd.nist.gov/developers/vulnerabilities
+    note:
+      en: Do not assign CVEs from a diagram alone; validate product, package, and version first.
+      pt-BR: Nao atribuir CVEs apenas a partir do diagrama; validar produto, pacote e versao primeiro.
+
+Elevation of Privilege:
+  references:
+    - source: CWE
+      reference_id: CWE-269
+      title: Improper Privilege Management
+      url: https://cwe.mitre.org/data/definitions/269.html
+      note:
+        en: Use when privilege boundaries or least-privilege controls are unclear.
+        pt-BR: Usar quando fronteiras de privilegio ou controles de menor privilegio forem pouco claros.
+    - source: OWASP API Security
+      reference_id: API5:2023
+      title: Broken Function Level Authorization
+      url: https://owasp.org/API-Security/editions/2023/en/0xa5-broken-function-level-authorization/
+      note:
+        en: Relevant when administrative or privileged API functions may be reachable.
+        pt-BR: Relevante quando funcoes administrativas ou privilegiadas de API podem estar acessiveis.
+    - source: NIST CSF
+      reference_id: PR.AA
+      title: Identity Management, Authentication, and Access Control
+      url: https://www.nist.gov/cyberframework
+      note:
+        en: Maps the finding to identity, authorization, and least-privilege outcomes.
+        pt-BR: Relaciona o achado a identidade, autorizacao e menor privilegio.
+  cve:
+    source: CVE/NVD
+    reference_id: Requires product/version
+    title: CVE lookup requires confirmed technology and version
+    url: https://nvd.nist.gov/developers/vulnerabilities
+    note:
+      en: Do not assign CVEs from a diagram alone; validate product, package, and version first.
+      pt-BR: Nao atribuir CVEs apenas a partir do diagrama; validar produto, pacote e versao primeiro.

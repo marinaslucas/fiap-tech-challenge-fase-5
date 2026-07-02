@@ -2,7 +2,7 @@ from pathlib import Path
 from uuid import uuid4
 
 from app.config import settings
-from app.schemas import ArchitectureModel, Countermeasure, Threat, VulnerabilityFinding
+from app.schemas import ArchitectureModel, Countermeasure, SecurityReference, Threat, VulnerabilityFinding
 
 
 class ReportService:
@@ -12,11 +12,12 @@ class ReportService:
         threats: list[Threat],
         vulnerabilities: list[VulnerabilityFinding],
         countermeasures: list[Countermeasure],
+        references: list[SecurityReference],
         report_language: str = "en",
     ) -> str:
         if report_language == "pt-BR":
-            return self._render_pt_br(architecture, threats, vulnerabilities, countermeasures)
-        return self._render_en(architecture, threats, vulnerabilities, countermeasures)
+            return self._render_pt_br(architecture, threats, vulnerabilities, countermeasures, references)
+        return self._render_en(architecture, threats, vulnerabilities, countermeasures, references)
 
     def _render_en(
         self,
@@ -24,6 +25,7 @@ class ReportService:
         threats: list[Threat],
         vulnerabilities: list[VulnerabilityFinding],
         countermeasures: list[Countermeasure],
+        references: list[SecurityReference],
     ) -> str:
         lines = [
             "# ThreatGraph AI STRIDE Report",
@@ -63,6 +65,8 @@ class ReportService:
             f"- {item.threat_id}: {item.recommendation} Priority: {item.priority}."
             for item in countermeasures
         )
+        lines.extend(["", "## References"])
+        lines.extend(self._reference_lines(references, language="en"))
 
         return "\n".join(lines).strip() + "\n"
 
@@ -72,6 +76,7 @@ class ReportService:
         threats: list[Threat],
         vulnerabilities: list[VulnerabilityFinding],
         countermeasures: list[Countermeasure],
+        references: list[SecurityReference],
     ) -> str:
         lines = [
             "# Relatório STRIDE do ThreatGraph AI",
@@ -111,8 +116,45 @@ class ReportService:
             f"- {item.threat_id}: {item.recommendation} Prioridade: {item.priority}."
             for item in countermeasures
         )
+        lines.extend(["", "## Refer\u00eancias"])
+        lines.extend(self._reference_lines(references, language="pt-BR"))
 
         return "\n".join(lines).strip() + "\n"
+
+    def _reference_lines(self, references: list[SecurityReference], language: str) -> list[str]:
+        if not references:
+            return [
+                "- Nenhuma refer\u00eancia aplic\u00e1vel foi mapeada."
+                if language == "pt-BR"
+                else "- No applicable references were mapped."
+            ]
+
+        grouped: dict[str, list[SecurityReference]] = {}
+        for reference in references:
+            grouped.setdefault(reference.threat_id, []).append(reference)
+
+        lines: list[str] = []
+        for threat_id, threat_references in grouped.items():
+            lines.append(f"### {threat_id}")
+            for reference in threat_references:
+                lines.append(
+                    f"- **{reference.source} {reference.reference_id}**: "
+                    f"[{reference.title}]({reference.url}) - {reference.note}"
+                )
+            lines.append("")
+
+        if language == "pt-BR":
+            lines.append(
+                "> Observa\u00e7\u00e3o: CVEs n\u00e3o s\u00e3o atribu\u00eddas automaticamente a partir de diagramas. "
+                "Confirme produto, pacote e vers\u00e3o antes de consultar ou declarar uma CVE."
+            )
+        else:
+            lines.append(
+                "> Note: CVEs are not assigned automatically from diagrams. Confirm product, package, "
+                "and version before querying or declaring a CVE."
+            )
+
+        return lines
 
     def _component_lines(self, architecture: ArchitectureModel, language: str) -> list[str]:
         if not architecture.components:

@@ -1,4 +1,4 @@
-from app.schemas import ArchitectureModel, Countermeasure, Threat, VulnerabilityFinding
+from app.schemas import ArchitectureModel, Countermeasure, SecurityReference, Threat, VulnerabilityFinding
 from app.services.report_service import ReportService
 
 
@@ -12,6 +12,7 @@ class ReportAgent:
         threats: list[Threat],
         vulnerabilities: list[VulnerabilityFinding],
         countermeasures: list[Countermeasure],
+        references: list[SecurityReference],
         report_language: str = "en",
     ) -> str:
         return self.report_service.render_markdown(
@@ -19,5 +20,6 @@ class ReportAgent:
             threats=threats,
             vulnerabilities=vulnerabilities,
             countermeasures=countermeasures,
+            references=references,
             report_language=report_language,
         )

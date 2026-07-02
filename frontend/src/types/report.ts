@@ -1,11 +1,12 @@
 import type { ArchitectureModel } from "./architecture";
-import type { Countermeasure, Threat, VulnerabilityFinding } from "./threat";
+import type { Countermeasure, SecurityReference, Threat, VulnerabilityFinding } from "./threat";
 
 export interface AnalysisResponse {
   architecture: ArchitectureModel;
   threats: Threat[];
   vulnerabilities: VulnerabilityFinding[];
   countermeasures: Countermeasure[];
+  references: SecurityReference[];
   report_markdown: string;
   audit: AnalysisAudit;
 }
@@ -16,6 +17,7 @@ export interface AnalysisAudit {
   threat_count: number;
   vulnerability_count: number;
   countermeasure_count: number;
+  reference_count: number;
   report_language: "en" | "pt-BR";
   gemini_model: string | null;
   gemini_configured: boolean;
