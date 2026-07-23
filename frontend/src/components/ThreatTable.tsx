@@ -24,7 +24,7 @@ export default function ThreatTable({ threats, language = "en" }: ThreatTablePro
         };
 
   return (
-    <div className="table-panel">
+    <div className="table-panel threat-table-panel">
       <div className="panel-title">{labels.title}</div>
       <table>
         <thead>

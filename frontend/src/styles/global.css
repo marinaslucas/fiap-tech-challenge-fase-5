@@ -115,6 +115,19 @@ select {
   opacity: 0.55;
 }
 
+.export-actions {
+  display: grid;
+  justify-items: end;
+  gap: 5px;
+  max-width: 310px;
+  color: #5a6875;
+  text-align: right;
+}
+
+.print-only {
+  display: none;
+}
+
 .secondary-action {
   min-height: 34px;
   border: 1px solid #455463;
@@ -290,6 +303,10 @@ select {
   font-weight: 800;
   line-height: 1.15;
   white-space: nowrap;
+}
+
+.detection-label-compact {
+  display: none;
 }
 
 .detection-box-0 {
@@ -1080,7 +1097,7 @@ th {
   }
 
   .report-print-footer::after {
-    content: "Page " counter(page);
+    content: none;
   }
 }
 
@@ -1135,5 +1152,294 @@ th {
 
   .report-summary-kpis {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media print {
+  .sidebar,
+  .page-header,
+  .no-print,
+  .screen-report-only,
+  .component-overview-detailed {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .workspace {
+    padding: 0 !important;
+  }
+
+  .report-print-shell {
+    gap: 0;
+  }
+
+  .report-document-header {
+    display: flex !important;
+    grid-template-columns: none !important;
+  }
+
+  .report-summary-card {
+    display: grid !important;
+    grid-template-columns: 0.9fr 1.1fr !important;
+  }
+
+  .priority-findings {
+    margin-top: 12pt;
+    border: 1px solid #e2e8f0;
+    border-radius: 4pt;
+    break-inside: avoid;
+  }
+
+  .priority-findings ol {
+    display: grid;
+    gap: 7pt;
+    margin: 0;
+    padding: 8pt 10pt 8pt 30pt;
+  }
+
+  .priority-findings li {
+    padding-left: 2pt;
+  }
+
+  .priority-findings li div {
+    display: flex;
+    justify-content: space-between;
+    gap: 8pt;
+  }
+
+  .priority-findings li span {
+    color: #64748b;
+    font-size: 8pt;
+    white-space: nowrap;
+  }
+
+  .priority-findings p {
+    margin: 2pt 0 0;
+    color: #334155;
+    font-size: 8.5pt;
+  }
+
+  .annotated-diagram {
+    break-before: page;
+    page-break-before: always;
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+  }
+
+  .annotated-diagram .viewer-frame {
+    margin: 0 auto;
+  }
+
+  .annotated-diagram .viewer img {
+    max-height: 300pt;
+  }
+
+  .annotated-diagram .detection-label-full {
+    display: none;
+  }
+
+  .annotated-diagram .detection-label-compact {
+    top: -14px;
+    display: inline-block;
+    min-width: 16px;
+    padding: 1px 3px;
+    border-radius: 2px;
+    font-size: 7pt;
+    line-height: 1.1;
+    text-align: center;
+  }
+
+  .detection-legend {
+    margin-top: 8pt;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 7pt;
+  }
+
+  .detection-legend h3 {
+    margin: 0 0 6pt;
+    font-size: 9pt;
+  }
+
+  .detection-legend ol {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 3pt 7pt;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .detection-legend li {
+    display: grid;
+    grid-template-columns: 18pt minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 3pt;
+    min-width: 0;
+    font-size: 7.2pt;
+  }
+
+  .detection-legend li > span {
+    border-radius: 2pt;
+    background: #e8eef4;
+    padding: 1pt 2pt;
+    text-align: center;
+    font-weight: 800;
+  }
+
+  .detection-legend strong {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .detection-legend small {
+    color: #64748b;
+    font-size: 6.8pt;
+  }
+
+  .component-summary {
+    break-before: page;
+    page-break-before: always;
+    border: 1px solid #e2e8f0;
+    border-radius: 4pt;
+  }
+
+  .component-summary td:first-child strong,
+  .component-summary td:first-child small {
+    display: block;
+  }
+
+  .component-summary td:first-child small {
+    margin-top: 1pt;
+    color: #64748b;
+    font-size: 7pt;
+  }
+
+  .threat-table-panel {
+    break-before: page;
+    page-break-before: always;
+  }
+
+  .report-findings {
+    break-before: page;
+    page-break-before: always;
+  }
+
+  .section-heading {
+    margin-bottom: 10pt;
+    border-bottom: 1px solid #cbd5e1;
+    padding-bottom: 7pt;
+  }
+
+  .section-heading h2 {
+    margin: 0;
+    font-size: 17pt;
+  }
+
+  .finding-list {
+    display: grid;
+    gap: 9pt;
+  }
+
+  .finding-card {
+    border: 1px solid #dbe2e8;
+    border-left: 3pt solid #d67d00;
+    border-radius: 4pt;
+    padding: 9pt;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .finding-card header > div {
+    display: flex;
+    align-items: center;
+    gap: 6pt;
+    color: #64748b;
+    font-size: 8pt;
+    font-weight: 700;
+  }
+
+  .finding-card h3 {
+    margin: 4pt 0 2pt;
+    font-size: 12pt;
+  }
+
+  .finding-card p {
+    margin: 0;
+  }
+
+  .severity-pill {
+    border-radius: 999px;
+    background: #fff2cc;
+    color: #7a5200;
+    padding: 2pt 5pt;
+    font-weight: 800;
+  }
+
+  .severity-critical {
+    background: #fee2e2;
+    color: #991b1b;
+  }
+
+  .severity-low {
+    background: #dcfce7;
+    color: #166534;
+  }
+
+  .finding-evidence {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8pt;
+    margin: 7pt 0;
+    border-radius: 3pt;
+    background: #f8fafc;
+    padding: 6pt;
+  }
+
+  .finding-evidence div {
+    display: grid;
+    gap: 1pt;
+  }
+
+  .finding-evidence dt,
+  .finding-card h4 {
+    color: #475569;
+    font-size: 7.5pt;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .finding-evidence dd {
+    margin: 0;
+  }
+
+  .finding-card section {
+    margin-top: 6pt;
+  }
+
+  .finding-card h4 {
+    margin: 0 0 2pt;
+  }
+
+  .finding-card ul {
+    margin: 0;
+    padding-left: 15pt;
+  }
+
+  .finding-card li {
+    margin: 2pt 0;
+  }
+
+  .finding-references ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2pt 12pt;
+  }
+
+  .report-print-footer {
+    justify-content: flex-start;
   }
 }

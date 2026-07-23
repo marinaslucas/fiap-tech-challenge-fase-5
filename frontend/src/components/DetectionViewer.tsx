@@ -54,8 +54,11 @@ export default function DetectionViewer({
                       height: toPercent(detection.bbox.y2 - detection.bbox.y1, imageSize.naturalHeight),
                     }}
                   >
-                    <span>
+                    <span className="detection-label-full">
                       {detection.component_type} {Math.round(detection.confidence * 100)}%
+                    </span>
+                    <span className="detection-label-compact">
+                      {String(index + 1).padStart(2, "0")}
                     </span>
                   </div>
                 );

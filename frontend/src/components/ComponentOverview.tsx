@@ -28,7 +28,7 @@ export default function ComponentOverview({ components, language = "en" }: Compo
         };
 
   return (
-    <section className="component-overview">
+    <section className="component-overview component-overview-detailed">
       <div className="panel-title">{labels.title}</div>
       <div className="component-grid">
         {components.map((component) => (

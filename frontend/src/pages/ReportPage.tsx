@@ -1,7 +1,10 @@
 import { FileDown } from "lucide-react";
 
 import ComponentOverview from "../components/ComponentOverview";
+import ComponentSummary from "../components/ComponentSummary";
+import DetectionLegend from "../components/DetectionLegend";
 import DetectionViewer from "../components/DetectionViewer";
+import ReportFindings from "../components/ReportFindings";
 import ReportViewer from "../components/ReportViewer";
 import RiskMatrix from "../components/RiskMatrix";
 import ThreatTable from "../components/ThreatTable";
@@ -21,7 +24,9 @@ export default function ReportPage({ analysis, imageUrl, detections }: ReportPag
         eyebrow: "Resultado STRIDE",
         title: "Relat\u00f3rio de Amea\u00e7as",
         exportPdf: "Exportar PDF",
+        printHint: "Na janela de impress\u00e3o, desative Cabe\u00e7alhos e rodap\u00e9s.",
         generatedAt: "Gerado em",
+        language: "Idioma",
         status: "Status",
         critical: "Cr\u00edticas",
         high: "Altas",
@@ -35,13 +40,16 @@ export default function ReportPage({ analysis, imageUrl, detections }: ReportPag
         attention: "Aten\u00e7\u00e3o requerida",
         criticalStatus: "Prioridade cr\u00edtica",
         annotatedDiagram: "Diagrama Anotado",
+        priorities: "Achados priorit\u00e1rios",
         noReport: "Nenhum relat\u00f3rio gerado ainda.",
       }
     : {
         eyebrow: "STRIDE Output",
         title: "Threat Report",
         exportPdf: "Export PDF",
+        printHint: "In the print dialog, disable Headers and footers.",
         generatedAt: "Generated at",
+        language: "Language",
         status: "Status",
         critical: "Critical",
         high: "High",
@@ -55,6 +63,7 @@ export default function ReportPage({ analysis, imageUrl, detections }: ReportPag
         attention: "Attention required",
         criticalStatus: "Critical priority",
         annotatedDiagram: "Annotated Diagram",
+        priorities: "Priority findings",
         noReport: "No report generated yet.",
       };
   const generatedAt = new Intl.DateTimeFormat(isPtBr ? "pt-BR" : "en-US", {
@@ -85,10 +94,13 @@ export default function ReportPage({ analysis, imageUrl, detections }: ReportPag
           <h1>{labels.title}</h1>
         </div>
         {analysis && (
-          <button className="primary-action no-print" onClick={handleExportPdf}>
-            <FileDown size={18} aria-hidden="true" />
-            {labels.exportPdf}
-          </button>
+          <div className="export-actions no-print">
+            <button className="primary-action" onClick={handleExportPdf}>
+              <FileDown size={18} aria-hidden="true" />
+              {labels.exportPdf}
+            </button>
+            <small>{labels.printHint}</small>
+          </div>
         )}
       </header>
 
@@ -105,7 +117,7 @@ export default function ReportPage({ analysis, imageUrl, detections }: ReportPag
                 <dd>{generatedAt}</dd>
               </div>
               <div>
-                <dt>Language</dt>
+                <dt>{labels.language}</dt>
                 <dd>{analysis.audit.report_language}</dd>
               </div>
             </dl>
@@ -146,14 +158,37 @@ export default function ReportPage({ analysis, imageUrl, detections }: ReportPag
           </section>
 
           <RiskMatrix threats={analysis.threats} />
+          <section className="priority-findings print-only">
+            <div className="panel-title">{labels.priorities}</div>
+            <ol>
+              {analysis.threats.slice(0, 3).map((threat) => (
+                <li key={threat.id}>
+                  <div>
+                    <strong>{threat.id} · {threat.stride_category}</strong>
+                    <span>{threat.severity} / {threat.confidence}</span>
+                  </div>
+                  <p>{threat.description}</p>
+                </li>
+              ))}
+            </ol>
+          </section>
           <section className="annotated-diagram">
             <div className="panel-title">{labels.annotatedDiagram}</div>
             <div className="annotated-diagram-body">
               <DetectionViewer imageUrl={imageUrl} detections={detections} showFooter={false} />
+              <DetectionLegend detections={detections} language={analysis.audit.report_language} />
             </div>
           </section>
+          <ComponentSummary components={analysis.architecture.components} language={analysis.audit.report_language} />
           <ComponentOverview components={analysis.architecture.components} language={analysis.audit.report_language} />
           <ThreatTable threats={analysis.threats} language={analysis.audit.report_language} />
+          <ReportFindings
+            threats={analysis.threats}
+            vulnerabilities={analysis.vulnerabilities}
+            countermeasures={analysis.countermeasures}
+            references={analysis.references}
+            language={analysis.audit.report_language}
+          />
           <ReportViewer markdown={analysis.report_markdown} />
           <footer className="report-print-footer">
             ThreatGraph AI - STRIDE Report
