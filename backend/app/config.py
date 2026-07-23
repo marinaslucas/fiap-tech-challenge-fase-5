@@ -23,6 +23,7 @@ class Settings(BaseSettings):
     model_path: Path = Path("models/best.pt")
     model_metadata_path: Path = Path("models/model_metadata.json")
     detector_confidence_threshold: float = Field(0.15, ge=0.0, le=1.0)
+    detector_diagnostic_confidence_threshold: float = Field(0.01, ge=0.0, le=1.0)
     detector_image_size: int = Field(960, ge=32)
     storage_dir: Path = Path("backend/storage")
     frontend_dist_dir_path: Path = Field(Path("frontend/dist"), alias="FRONTEND_DIST_DIR")
