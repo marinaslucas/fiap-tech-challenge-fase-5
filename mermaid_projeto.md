@@ -39,14 +39,14 @@ flowchart TD
         D
     end
 
-    subgraph Detecção Supervisionada
+    subgraph DetecaoSupervisionada
         E
         F
         G
         H
     end
 
-    subgraph Workflow LangGraph
+    subgraph Workflow
         I
         J
         K
@@ -55,7 +55,7 @@ flowchart TD
         N
     end
 
-    subgraph Saída
+    subgraph Saida
         S
         T
         U
