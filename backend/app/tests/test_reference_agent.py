@@ -19,11 +19,10 @@ def test_reference_agent_maps_dos_to_curated_sources() -> None:
         "CWE",
         "OWASP API Security",
         "NIST CSF",
-        "CVE/NVD",
     }
     assert any(reference.reference_id == "CWE-400" for reference in references)
     assert any(reference.reference_id == "API4:2023" for reference in references)
-    assert any(reference.reference_id == "Requires product/version" for reference in references)
+    assert all(reference.source != "CVE/NVD" for reference in references)
 
 
 def test_reference_agent_localizes_pt_br_notes() -> None:

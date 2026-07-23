@@ -27,14 +27,6 @@ class ReferenceService:
                     references.append(reference)
                     seen.add(key)
 
-            cve_entry = entry.get("cve")
-            if cve_entry:
-                reference = self._build_reference(threat.id, cve_entry, report_language)
-                key = (reference.threat_id, reference.source, reference.reference_id)
-                if key not in seen:
-                    references.append(reference)
-                    seen.add(key)
-
         return references
 
     def _load_reference_map(self) -> dict[str, Any]:

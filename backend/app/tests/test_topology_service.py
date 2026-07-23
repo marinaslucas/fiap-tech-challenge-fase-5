@@ -38,3 +38,18 @@ def test_normalize_infers_external_actor_to_entrypoint_flow() -> None:
     assert architecture.flows[0].target == "component_002"
     assert architecture.flows[0].protocol == "HTTPS"
     assert architecture.flows[0].confidence == "Low"
+
+
+def test_normalize_places_backup_service_in_data_zone() -> None:
+    detections = [
+        Detection(
+            component_type="backup_service",
+            confidence=0.94,
+            bbox=BoundingBox(x1=0, y1=0, x2=10, y2=10),
+        )
+    ]
+
+    architecture = TopologyService().normalize(detections)
+
+    assert architecture.components[0].zone == "data"
+    assert architecture.components[0].exposure == "internal"

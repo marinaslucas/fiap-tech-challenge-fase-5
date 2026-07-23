@@ -16,7 +16,15 @@ INTERNET_FACING_TYPES = {
     "actor_admin",
 }
 
-DATA_TYPES = {"database", "cache", "object_storage", "data_database", "data_cache", "data_storage"}
+DATA_TYPES = {
+    "database",
+    "cache",
+    "object_storage",
+    "data_database",
+    "data_cache",
+    "data_storage",
+    "backup_service",
+}
 SECURITY_TYPES = {"security_identity_provider", "security_key_management", "obs_audit"}
 OBSERVABILITY_TYPES = {"obs_monitoring"}
 EXTERNAL_TYPES = {

@@ -60,7 +60,7 @@ def run_analysis_graph(
                 f"STRIDEAgent generated {len(threats)} threats using {'Gemini' if stride_audit.get('llm_used') else 'local fallback rules'}.",
                 f"VulnerabilityAgent mapped {len(vulnerabilities)} vulnerability findings.",
                 f"CountermeasureAgent generated {len(countermeasures)} countermeasures.",
-                f"ReferenceAgent attached {len(references)} curated CWE, OWASP, NIST, and CVE validation references.",
+                f"ReferenceAgent attached {len(references)} curated CWE, OWASP, and NIST validation references.",
                 "ReportAgent rendered the final report markdown.",
             ],
         ),
