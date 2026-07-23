@@ -7,7 +7,7 @@ from fastapi import HTTPException
 from app.config import settings
 from app.schemas import BoundingBox, Detection, DetectionResponse
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("uvicorn.error")
 
 SUPPORTED_IMAGE_SUFFIXES = {
     ".avif",
