@@ -51,6 +51,9 @@ class DetectorService:
         results = model.predict(
             source=str(image_path),
             conf=settings.detector_confidence_threshold,
+            imgsz=settings.detector_image_size,
+            iou=0.7,
+            max_det=300,
             verbose=False,
         )
         detections = self._to_detections(results[0])
